@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthPostController = void 0;
 const common_1 = require("@nestjs/common");
@@ -31,7 +32,7 @@ __decorate([
     (0, microservices_1.MessagePattern)({ cmd: 'sign-up' }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", typeof (_a = typeof Promise !== "undefined" && Promise) === "function" ? _a : Object)
 ], AuthPostController.prototype, "signUp", null);
 AuthPostController = __decorate([
     (0, common_1.Controller)(),
