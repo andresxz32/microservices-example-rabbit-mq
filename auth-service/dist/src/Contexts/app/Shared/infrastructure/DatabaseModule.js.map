@@ -1,1 +1,0 @@
-{"version":3,"file":"DatabaseModule.js","sourceRoot":"","sources":["../../../../../../src/Contexts/app/Shared/infrastructure/DatabaseModule.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAAwC;AACxC,6DAA0D;AAMnD,IAAM,cAAc,GAApB,MAAM,cAAc;CAAI,CAAA;AAAlB,cAAc;IAJ1B,IAAA,eAAM,EAAC;QACJ,SAAS,EAAE,CAAC,uCAAkB,CAAC;QAC/B,OAAO,EAAE,CAAC,uCAAkB,CAAC;KAChC,CAAC;GACW,cAAc,CAAI;AAAlB,wCAAc"}
