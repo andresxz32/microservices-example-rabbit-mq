@@ -7,16 +7,21 @@ import { ClientProxy, MessagePattern } from '@nestjs/microservices';
 export class AuthPostController {
 
     constructor(
+        @Inject('USER_SERVICE')
+        private readonly _userMicroservice: ClientProxy
     ) { }
 
     @MessagePattern({ cmd: 'sign-in' })
     signIn(name: string): string {
-        return `Hi ${JSON.stringify(name)}`;
+        this._userMicroservice.emit('findUser',{
+            message:'Find user'
+        })
+        return `Sign In service`;
     }
 
     @MessagePattern({ cmd: 'sign-up' })
     async signUp(name: string): Promise<string> {
-        return `Hi ${name} Async`;
+        return `Sign Up`;
     }
 }
 
