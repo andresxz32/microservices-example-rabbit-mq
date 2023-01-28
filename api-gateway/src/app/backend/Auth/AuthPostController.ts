@@ -1,7 +1,6 @@
-import { Body, Controller, Inject, Post } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
-import { CreateUserDto } from '../../data-object/create-user-dto';
-import { UserAuthCredentialsDto } from '../../data-object/user-auth-credentials-dto';
+import { Body, Controller, Inject, Post, UseGuards } from '@nestjs/common';
+import { AuthValidator } from 'src/Contexts/app/Auth/application/AuthValidator';
+import { LocalAuthGuard } from '../../../Contexts/app/Shared/local-auth.guard';
 
 
 
@@ -9,21 +8,18 @@ import { UserAuthCredentialsDto } from '../../data-object/user-auth-credentials-
 export class AuthPostController {
 
     constructor(
-        @Inject('AUTH_SERVICE') private readonly _clientProxy: ClientProxy
+        private readonly _authValidator: AuthValidator
     ) { }
 
+
+    @UseGuards(LocalAuthGuard)
     @Post('sign-in')
     async signIn(
         @Body() authCredentialsDto,
     ): Promise<any> {
-        return await this._clientProxy.send({ cmd: 'sign-in' }, authCredentialsDto)
+        return this._authValidator.login({});
     }
 
-    @Post('sign-up')
-    async signUp(@Body() createUserDto: CreateUserDto): Promise<any> {
-        return await this._clientProxy.send({ cmd: 'sign-up' }, createUserDto)
-
-    }
 }
 
 
