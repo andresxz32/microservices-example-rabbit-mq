@@ -3,13 +3,14 @@ package middlewares
 import (
 	"fmt"
 	"net/http"
-	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+
+	helpers "user-service/src/app/backend/helpers"
 )
 
-func ReqValidate[T any](next func(*gin.Context, *T)) gin.HandlerFunc {
+func BodyValidator[T any](next func(*gin.Context, *T)) gin.HandlerFunc {
 	return func(context *gin.Context) {
 		body := new(T)
 		err := context.ShouldBindJSON(body)
@@ -17,7 +18,7 @@ func ReqValidate[T any](next func(*gin.Context, *T)) gin.HandlerFunc {
 		if err != nil {
 			errorMessages := []string{}
 			for _, e := range err.(validator.ValidationErrors) {
-				errorMessages = append(errorMessages, getErrorMessage(strings.ToLower(e.Field()), e.ActualTag()))
+				errorMessages = append(errorMessages, helpers.GetErrorMessage(e.Field(), e.ActualTag()))
 
 			}
 
