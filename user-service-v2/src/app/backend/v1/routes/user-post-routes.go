@@ -9,7 +9,7 @@ import (
 )
 
 //POST request for users
-func UserPostController(rg *gin.RouterGroup) {
+func UserPostRoutes(rg *gin.RouterGroup) {
 
 	users := rg.Group("/users")
 

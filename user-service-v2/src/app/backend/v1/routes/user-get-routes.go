@@ -10,7 +10,7 @@ import (
 )
 
 //GET request for users
-func UserGetController(rg *gin.RouterGroup) {
+func UserGetRoutes(rg *gin.RouterGroup) {
 
 	users := rg.Group("/users")
 

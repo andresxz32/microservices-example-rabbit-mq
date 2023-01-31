@@ -6,12 +6,17 @@ var router = gin.Default()
 
 // Run will start the server
 func Run() {
-	getRoutes()
+	routes()
 	router.Run(":5000")
 }
 
-func getRoutes() {
+//Method for declare routes
+func routes() {
+
+	//Declare prefix
 	v1 := router.Group("/api/v1")
-	UserGetController(v1)
-	UserPostController(v1)
+
+	//Call user routes
+	UserGetRoutes(v1)
+	UserPostRoutes(v1)
 }
