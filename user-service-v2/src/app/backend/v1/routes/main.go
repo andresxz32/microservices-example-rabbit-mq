@@ -16,7 +16,9 @@ func routes() {
 	//Declare prefix
 	v1 := router.Group("/api/v1")
 
-	//Call user routes
+	//Call user GET routes
 	UserGetRoutes(v1)
+
+	//Call user POST routes
 	UserPostRoutes(v1)
 }

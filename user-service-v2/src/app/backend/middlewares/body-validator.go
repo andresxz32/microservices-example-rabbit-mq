@@ -1,7 +1,6 @@
 package middlewares
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -10,18 +9,30 @@ import (
 	helpers "user-service/src/app/backend/helpers"
 )
 
+//Declare function for validate body of request
 func BodyValidator[T any](next func(*gin.Context, *T)) gin.HandlerFunc {
 	return func(context *gin.Context) {
+
+		//Set model to validate
 		body := new(T)
+
+		//Get errors
 		err := context.ShouldBindJSON(body)
 
+		// Validate if exist errors
 		if err != nil {
+
 			errorMessages := []string{}
+
+			//Extract errors
 			for _, e := range err.(validator.ValidationErrors) {
+
+				// Add errors to stack errors
 				errorMessages = append(errorMessages, helpers.GetErrorMessage(e.Field(), e.ActualTag()))
 
 			}
 
+			// Return response with Error struct
 			context.JSON(http.StatusUnprocessableEntity, gin.H{
 				"errors":     errorMessages,
 				"message":    "Unprocessable Entity",
@@ -31,13 +42,4 @@ func BodyValidator[T any](next func(*gin.Context, *T)) gin.HandlerFunc {
 		}
 		next(context, body)
 	}
-}
-
-func getErrorMessage(property string, tag string) string {
-	var messages = map[string]string{
-		"required": fmt.Sprintf(`The property %s is %s`, property, tag),
-		"email":    fmt.Sprintf(`The property %s must be a %s`, property, tag),
-		"uuid":     fmt.Sprintf(`The property %s must be a %sv4`, property, tag),
-	}
-	return messages[tag]
 }

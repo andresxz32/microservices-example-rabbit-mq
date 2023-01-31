@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+//Declare function for get errors
 func GetErrorMessage(property string, tag string) string {
 	var messages = map[string]string{
 		"required": fmt.Sprintf(`The property << %s >> is %s`, property, tag),
